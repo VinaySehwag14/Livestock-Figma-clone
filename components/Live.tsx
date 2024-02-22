@@ -45,7 +45,7 @@ const Live = () => {
     const onKeyUp = (e: KeyboardEvent) => {
       if (e.key === "/") {
         setCursorState({
-          mode: CursorMode.chat,
+          mode: CursorMode.Chat,
           previousMessage: null,
           message: "",
         });
@@ -60,7 +60,14 @@ const Live = () => {
         e.preventDefault();
       }
     };
-    window.addEventListener("Keyup", onKeyUp);
+
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [updateMyPresence]);
 
   return (
